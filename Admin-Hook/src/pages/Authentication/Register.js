@@ -12,6 +12,8 @@ import { registerUser, apiError, registerUserFailed } from "../../store/actions"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
+import {post} from "../../helpers/api_helper"
+import{POST_USER_REGISTER}  from "../../helpers/url_helper"
 // import images
 import profileImg from "../../assets/images/profile-img.png"
 import logoImg from "../../assets/images/logo.svg"
@@ -19,9 +21,28 @@ import logoImg from "../../assets/images/logo.svg"
 const Register = props => {
   // handleValidSubmit
   const handleValidSubmit = (event, values) => {
-    
-      props.registerUser(values)
-   
+   // props.registerUser(values, props.history)
+    var response = post(POST_USER_REGISTER,{
+      email: values.email,
+      password: values.password,
+      firstName : values.firstName,
+      lastName : values.lastName,
+      mobileNumber : values.mobileNumber,
+      type : "user",
+    })
+    response.then((val) => {
+      const data = val.statusCode;
+              if (data === "OK")
+               {
+                  history.push("/dashboard");
+              }
+              else
+              {
+                
+              }
+          })
+
+
   }
 
   useEffect(() => {
@@ -91,7 +112,7 @@ const Register = props => {
                       <div className="form-group">
                         <AvField
                           id="email"
-                          name="Email"
+                          name="email"
                           label="Email"
                           className="form-control"
                           placeholder="Enter email"
@@ -102,7 +123,7 @@ const Register = props => {
 
                       <div className="form-group">
                         <AvField
-                          name="FirstName"
+                          name="firstName"
                           label="First Name"
                           type="text"
                           required
@@ -111,7 +132,7 @@ const Register = props => {
                       </div>
                       <div className="form-group">
                         <AvField
-                          name="LastName"
+                          name="lastName"
                           label="Last Name"
                           type="text"
                           required
@@ -121,7 +142,7 @@ const Register = props => {
                       <div className="form-group">
                      
                         <AvField
-                          name="Password"
+                          name="password"
                           label="Password"
                           type="password"
                           required
@@ -131,22 +152,14 @@ const Register = props => {
                       
                       <div className="form-group">
                         <AvField
-                          name="MobileNumber"
+                          name="mobileNumber"
                           label="Mobile Number"
                           type="text"
                           required
                           placeholder="Enter Mobile Number"
                         />
                       </div>
-                      <div className="form-group">
-                        <AvField
-                          name="PhoneNumber"
-                          label="Phone Number"
-                          type="text"
-                          required
-                          placeholder="Enter Phone Number"
-                        />
-                      </div>
+                      
                       <div className="mt-4">
                         <button
                           className="btn btn-primary btn-block waves-effect waves-light"
