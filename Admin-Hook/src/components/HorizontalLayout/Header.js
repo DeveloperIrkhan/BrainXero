@@ -37,32 +37,6 @@ const Header = props => {
   const [isSearch, setSearch] = useState(false)
   const [socialDrp, setsocialDrp] = useState(false)
 
-  function toggleFullscreen() {
-    if (
-      !document.fullscreenElement &&
-      /* alternative standard method */ !document.mozFullScreenElement &&
-      !document.webkitFullscreenElement
-    ) {
-      // current working methods
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen()
-      } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen()
-      } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen(
-          Element.ALLOW_KEYBOARD_INPUT
-        )
-      }
-    } else {
-      if (document.cancelFullScreen) {
-        document.cancelFullScreen()
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen()
-      } else if (document.webkitCancelFullScreen) {
-        document.webkitCancelFullScreen()
-      }
-    }
-  }
   return (
     <React.Fragment>
       <header id="page-topbar">
@@ -99,17 +73,6 @@ const Header = props => {
             >
               <i className="fa fa-fw fa-bars"/>
             </button>
-
-            <form className="app-search d-none d-lg-block">
-              <div className="position-relative">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search..."
-                />
-                <span className="bx bx-search-alt"/>
-              </div>
-            </form>
 
             <Dropdown
               className="dropdown-mega d-none d-lg-block ml-2"
@@ -299,94 +262,10 @@ const Header = props => {
 
             <LanguageDropdown />
 
-            <Dropdown
-              className="d-none d-lg-inline-block ml-1"
-              isOpen={socialDrp}
-              toggle={() => {
-                setsocialDrp(!socialDrp)
-              }}
-            >
-              <DropdownToggle
-                className="btn header-item noti-icon waves-effect"
-                caret
-                tag="button"
-              >
-                <i className="bx bx-customize"/>
-              </DropdownToggle>
-              <DropdownMenu className="dropdown-menu-lg" right>
-                <div className="px-lg-2">
-                  <Row className="no-gutters">
-                    <Col>
-                      <Link className="dropdown-icon-item" to="#">
-                        <img src={github} alt="Github" />
-                        <span>GitHub</span>
-                      </Link>
-                    </Col>
-                    <Col>
-                      <Link className="dropdown-icon-item" to="#">
-                        <img src={bitbucket} alt="bitbucket" />
-                        <span>Bitbucket</span>
-                      </Link>
-                    </Col>
-                    <Col>
-                      <Link className="dropdown-icon-item" to="#">
-                        <img src={dribbble} alt="dribbble" />
-                        <span>Dribbble</span>
-                      </Link>
-                    </Col>
-                  </Row>
-                  <Row className="no-gutters">
-                    <Col>
-                      <Link className="dropdown-icon-item" to="#">
-                        <img src={dropbox} alt="dropbox" />
-                        <span>Dropbox</span>
-                      </Link>
-                    </Col>
-                    <Col>
-                      <Link className="dropdown-icon-item" to="#">
-                        <img src={mail_chimp} alt="mail_chimp" />
-                        <span>Mail Chimp</span>
-                      </Link>
-                    </Col>
-                    <Col>
-                      <Link className="dropdown-icon-item" to="#">
-                        <img src={slack} alt="slack" />
-                        <span>Slack</span>
-                      </Link>
-                    </Col>
-                  </Row>
-                </div>
-              </DropdownMenu>
-            </Dropdown>
-
-            <div className="dropdown d-none d-lg-inline-block ml-1">
-              <button
-                type="button"
-                className="btn header-item noti-icon waves-effect"
-                onClick={() => {
-                  toggleFullscreen()
-                }}
-                data-toggle="fullscreen"
-              >
-                <i className="bx bx-fullscreen"/>
-              </button>
-            </div>
-
             <NotificationDropdown />
 
             <ProfileMenu />
 
-            <div className="dropdown d-inline-block">
-              <button
-                onClick={() => {
-                  props.showRightSidebarAction(!props.showRightSidebar)
-                }}
-                type="button"
-                className="btn header-item noti-icon right-bar-toggle waves-effect"
-              >
-                <i className="bx bx-cog bx-spin"/>
-              </button>
-            </div>
           </div>
         </div>
       </header>

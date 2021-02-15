@@ -164,6 +164,13 @@ import ContactsGrid from "../pages/Contacts/contacts-grid"
 import ContactsList from "../pages/Contacts/ContactList/contacts-list"
 import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile"
 
+import VerifyDocuments from '../pages/VerifyDocuments/VerifyDocument';
+import ChooseDocuments from '../pages/VerifyDocuments/ChooseDocument';
+import ConfirmDocumentData from '../pages/VerifyDocuments/ConfirmDocumentData';
+import BiometricAuth from '../pages/VerifyDocuments/BiometricAuth';
+import DocumentVerificationWizard from '../pages/VerifyDocuments/DocumentVerificationWizard';
+import DocumentVerification from '../pages/VerifyDocuments/DocumentVerification';
+
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
@@ -301,6 +308,13 @@ const userRoutes = [
   { path: "/pages-timeline", component: PagesTimeline },
   { path: "/pages-faqs", component: PagesFaqs },
   { path: "/pages-pricing", component: PagesPricing },
+
+  { path: "/verify-documents", component: VerifyDocuments },
+  { path: "/choose-document", component: ChooseDocuments },
+  { path: "/confirm-document", component: ConfirmDocumentData },
+  { path: "/biometric-auth", component: BiometricAuth },
+  { path: "/verify-document-wizard", component: DocumentVerificationWizard },
+  { path: "/verify-document-modal", component: DocumentVerification },
 
   // this route should be at the end of all other routes
   { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },

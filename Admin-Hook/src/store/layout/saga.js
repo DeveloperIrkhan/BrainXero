@@ -97,7 +97,7 @@ function* changeLeftSidebarTheme({ payload: theme }) {
  */
 function* changeTopbarTheme({ payload: theme }) {
   try {
-    yield call(changeBodyAttribute, "data-topbar", theme)
+    yield call(changeBodyAttribute, "data-topbar", 'dark')
   } catch (error) {}
 }
 

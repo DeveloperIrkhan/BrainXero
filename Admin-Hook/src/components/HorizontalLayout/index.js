@@ -10,10 +10,8 @@ import {
 } from "../../store/actions"
 
 // Other Layout related Component
-import Navbar from "./Navbar"
 import Header from "./Header"
 import Footer from "./Footer"
-import Rightbar from "../CommonForBoth/Rightbar"
 
 class Layout extends Component {
   constructor(props) {
@@ -83,12 +81,10 @@ class Layout extends Component {
             isMenuOpened={this.state.isMenuOpened}
             openLeftMenuCallBack={this.openMenu}
           />
-          <Navbar menuOpen={this.state.isMenuOpened} />
+        {/*  <Navbar menuOpen={this.state.isMenuOpened} />*/}
           <div className="main-content">{this.props.children}</div>
           <Footer />
         </div>
-
-        {this.props.showRightSidebar ? <Rightbar /> : null}
       </React.Fragment>
     )
   }

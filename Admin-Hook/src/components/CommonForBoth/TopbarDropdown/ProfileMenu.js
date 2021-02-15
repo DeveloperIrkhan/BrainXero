@@ -63,18 +63,9 @@ const ProfileMenu = props => {
             <i className="bx bx-user font-size-16 align-middle mr-1"/>
             {props.t("Profile")}{" "}
           </DropdownItem>
-          <DropdownItem tag="a" href="/crypto-wallet">
-            <i className="bx bx-wallet font-size-16 align-middle mr-1"/>
-            {props.t("My Wallet")}
-          </DropdownItem>
           <DropdownItem tag="a" href="#">
-            <span className="badge badge-success float-right">11</span>
             <i className="mdi mdi-settings font-size-17 align-middle mr-1"/>
             {props.t("Settings")}
-          </DropdownItem>
-          <DropdownItem tag="a" href="auth-lock-screen">
-            <i className="bx bx-lock-open font-size-16 align-middle mr-1"/>
-            {props.t("Lock screen")}
           </DropdownItem>
           <div className="dropdown-divider"/>
           <Link to="/logout" className="dropdown-item">
