@@ -51,13 +51,14 @@ const DocumentVerification = () => {
   function handleBioAuth()
   {
     const formData = new FormData();
-    let imageFile = selectedFiles[0];
+    let docFile = selectedFiles[0];
+    let selfieFile = selfieFiles[0];
+    let docType = documentType;
     // Update the formData object
-    formData.append(
-      "myFile", // name of the parameter
-      imageFile,
-      imageFile.name
-    );
+  
+formData.append("docFile",docFile,docFile.name);
+formData.append("selfieFile",selfieFile,selfieFile.name);
+formData.append("docType",docType);
 
     // Request made to the backend api
     // Send formData object

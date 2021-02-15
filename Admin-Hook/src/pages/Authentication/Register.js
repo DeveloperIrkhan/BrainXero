@@ -36,10 +36,10 @@ const Register = props => {
                {
                   history.push("/dashboard");
               }
-              else
-              {
+              else if(data === "Conflict")
+             {
                 
-              }
+             }
           })
 
 

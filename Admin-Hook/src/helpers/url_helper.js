@@ -2,6 +2,7 @@
 export const POST_FAKE_REGISTER = "/post-fake-register"
 export const POST_USER_REGISTER = "/account/registeruser"
 
+
 //LOGIN
 export const POST_FAKE_LOGIN = "/post-fake-login"
 export const POST_FAKE_JWT_LOGIN = "/account/userlogin"
@@ -64,3 +65,6 @@ export const GET_USER_PROFILE = "/user"
 
 // Authentication
 export const POST_AUTH_CODE = "/account/logincode"
+
+//Documentation Uploading
+export const POST_UPLOAD_DOCUMENT = "/documents/userdocuments"

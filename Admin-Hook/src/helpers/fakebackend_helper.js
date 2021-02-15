@@ -149,6 +149,7 @@ export const getUsers = () => get(url.GET_USERS)
 
 export const getUserProfile = () => get(url.GET_USER_PROFILE)
 
+export const postFakeRegister = "/post-fake-register"
 export {
   getLoggedInUser,
   isUserAuthenticated,
