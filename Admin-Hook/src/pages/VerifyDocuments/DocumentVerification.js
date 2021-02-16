@@ -13,6 +13,7 @@ import {
   NavItem,
   NavLink,
   Label,
+  Spinner,
   Button,
   Input,
   Form,
@@ -34,7 +35,7 @@ import toastr from "toastr"
 import "toastr/build/toastr.min.css"
 
 import {POST_UPLOAD_DOCUMENT} from '../../helpers/url_helper';
-import {post} from '../../helpers/api_helper';
+import {postForm} from '../../helpers/api_helper';
 
 const DocumentVerification = () => {
 
@@ -43,6 +44,8 @@ const DocumentVerification = () => {
     const [selectedFiles, setselectedFiles] = useState([])
     const [selfieFiles, setselfieFiles] = useState([])
     const [documentType, setdocumentType] = useState('default')
+    const [flag, setFlag] = useState(false);
+  
 
  function togglemodal(){
     setmodal(!modal);
@@ -54,7 +57,9 @@ const DocumentVerification = () => {
     let docFile = selectedFiles[0];
     let selfieFile = selfieFiles[0];
     let docType = documentType;
+    
     // Update the formData object
+
   
 formData.append("docFile",docFile,docFile.name);
 formData.append("selfieFile",selfieFile,selfieFile.name);
@@ -62,13 +67,17 @@ formData.append("docType",docType);
 
     // Request made to the backend api
     // Send formData object
-    var response = post(POST_UPLOAD_DOCUMENT, formData)
+
+    var response = postForm(POST_UPLOAD_DOCUMENT, formData)
     
-    response.then((val) => {
+    response.then((val) => 
+    {
       const data = val.statusCode;
+      setFlag(false);
       history.push("/confirm-document");
           })
 
+    
   }
 
   function toggleTab(tab) {
@@ -97,6 +106,7 @@ formData.append("docType",docType);
         }
         
         handleBioAuth();
+        setFlag(true);
         
       }
       if (progress && tab >= 1 && tab <= 4) {
@@ -239,6 +249,7 @@ formData.append("docType",docType);
                                   Upload Selfie
                                 </NavLink>
                               </NavItem>
+                            
                               <NavItem>
                                 <NavLink
                                   className={classnames({
@@ -298,9 +309,11 @@ formData.append("docType",docType);
                                             <i className="display-4 text-muted bx bxs-cloud-upload"></i>
                                           </div>
                                           <h3>
+                                          
                                             Drop files here or click to upload.
                                           </h3>
                                         </div>
+                                       
                                       </div>
                                     )}
                                   </Dropzone>
@@ -356,6 +369,7 @@ formData.append("docType",docType);
                                   <Form>
                                     <Row>
                                       <Col lg="12">
+                                     
                                         <FormGroup>
                                           <Label for="kycemail-input">
                                             Please select a selfie to upload
@@ -371,6 +385,7 @@ formData.append("docType",docType);
                                       toastr.error("Please select an image file");
                                     }}
                                   >
+                                   
                                     {({ getRootProps, getInputProps }) => (
                                       <div className="dropzone">
                                         <div
@@ -381,9 +396,11 @@ formData.append("docType",docType);
                                           <div className="mb-3">
                                             <i className="display-4 text-muted bx bxs-cloud-upload"></i>
                                           </div>
-                                          <h3>
+                                         
+                                           <h3>
                                             Drop files here or click to upload.
                                           </h3>
+                                           
                                         </div>
                                       </div>
                                     )}
@@ -456,9 +473,13 @@ formData.append("docType",docType);
                                           <div className="mb-3">
                                             <i className="display-4 text-muted bx bxs-cloud-upload"></i>
                                           </div>
-                                          <h3>
+                                         {  flag ?
+                                            <Spinner className="mr-2" color="primary" /> :
+                                           <h3>
                                             Drop files here or click to upload.
                                           </h3>
+                                           
+                                            }
                                         </div>
                                       </div>
                                     )}

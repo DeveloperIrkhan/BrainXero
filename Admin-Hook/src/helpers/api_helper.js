@@ -28,6 +28,12 @@ export async function post(url, data, config = {}) {
     .then(response => response.data)
 }
 
+export async function postForm(url, data, config = {headers: {'Content-Type': 'multipart/form-data','Accept' : '*/*'}}) {
+ 
+  return axiosApi
+    .post(url, data , { ...config })
+    .then(response => response.data)
+}
 export async function put(url, data, config = {}) {
   return axiosApi
     .put(url, { ...data }, { ...config })
