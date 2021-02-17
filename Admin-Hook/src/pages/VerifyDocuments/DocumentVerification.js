@@ -18,8 +18,11 @@ import {
   Input,
   Form,
   FormGroup,
+  CardTitle,
+  CardSubtitle,
 } from "reactstrap"
 
+import LoadingOverlay from 'react-loading-overlay';
 import classnames from "classnames"
 import { Link } from "react-router-dom"
 
@@ -45,7 +48,14 @@ const DocumentVerification = () => {
     const [selfieFiles, setselfieFiles] = useState([])
     const [documentType, setdocumentType] = useState('default')
     const [flag, setFlag] = useState(false);
-  
+    const [fullName, setFullName] = useState('FullName')
+    const [sex, setsex] = useState('Gender')
+    const [age, setage] = useState('Age')
+    const [documentNo, setdocumentNo] = useState('Document No')
+    const [counrty, setcounrty] = useState('country')
+    const [region, setregion] = useState('state/region')
+    const [type, settype] = useState('Document Type')
+    const [dateofbirth, setdateofbirth] = useState('')
 
  function togglemodal(){
     setmodal(!modal);
@@ -72,10 +82,22 @@ formData.append("docType",docType);
     
     response.then((val) => 
     {
-      const data = val.statusCode;
+      //const data = val.statusCode;
+      
       setFlag(false);
-      history.push("/confirm-document");
+      //history.push("/confirm-document");
+     
+      setFullName(val.documentInformation.fullName);
+      setage(val.scanResponse.scanVariables.age);
+      setdocumentNo(val.documentInformation.documentNo);
+      setcounrty(val.scanResponse.scanVariables.classInfo.country);
+      setregion(val.scanResponse.scanVariables.classInfo.region)
+      settype(val.scanResponse.scanVariables.classInfo.type)
+      setdateofbirth(val.scanResponse.scanVariables.dateOfBirth.originalString)
+      setsex(val.scanResponse.scanVariables.sex)
+
           })
+
 
     
   }
@@ -104,9 +126,9 @@ formData.append("docType",docType);
           progress=false;
           toastr.error('Please select a selfie')
         }
-        
-        handleBioAuth();
         setFlag(true);
+        handleBioAuth();
+       
         
       }
       if (progress && tab >= 1 && tab <= 4) {
@@ -299,6 +321,8 @@ formData.append("docType",docType);
                                     }}
                                   >
                                     {({ getRootProps, getInputProps }) => (
+                                        <LoadingOverlay active={flag}>
+
                                       <div className="dropzone">
                                         <div
                                           className="dz-message needsclick"
@@ -315,6 +339,7 @@ formData.append("docType",docType);
                                         </div>
                                        
                                       </div>
+                                      </LoadingOverlay>
                                     )}
                                   </Dropzone>
                                   <div
@@ -387,6 +412,7 @@ formData.append("docType",docType);
                                   >
                                    
                                     {({ getRootProps, getInputProps }) => (
+                                      <LoadingOverlay active={flag}>
                                       <div className="dropzone">
                                         <div
                                           className="dz-message needsclick"
@@ -396,13 +422,16 @@ formData.append("docType",docType);
                                           <div className="mb-3">
                                             <i className="display-4 text-muted bx bxs-cloud-upload"></i>
                                           </div>
-                                         
+                                          {  flag ?
+                                         <Spinner className="mr-2" color="primary" />
+                                             :
                                            <h3>
                                             Drop files here or click to upload.
                                           </h3>
-                                           
+                                           }
                                         </div>
                                       </div>
+                                      </LoadingOverlay>
                                     )}
                                   </Dropzone>
                                   <div
@@ -455,35 +484,137 @@ formData.append("docType",docType);
                               </TabPane>
                               <TabPane tabId={3} id="doc-verification">
                                 <h5 className="font-size-14 mb-3">
-                                  Upload document file for a verification
+                                  confrim Details
                                 </h5>
                                 <div className="kyc-doc-verification mb-3">
-                                  <Dropzone
-                                    onDrop={acceptedFiles =>
-                                      handleAcceptedFiles(acceptedFiles)
-                                    }
-                                  >
-                                    {({ getRootProps, getInputProps }) => (
-                                      <div className="dropzone">
-                                        <div
-                                          className="dz-message needsclick"
-                                          {...getRootProps()}
-                                        >
-                                          <input {...getInputProps()} />
-                                          <div className="mb-3">
-                                            <i className="display-4 text-muted bx bxs-cloud-upload"></i>
-                                          </div>
-                                         {  flag ?
-                                            <Spinner className="mr-2" color="primary" /> :
-                                           <h3>
-                                            Drop files here or click to upload.
-                                          </h3>
-                                           
-                                            }
-                                        </div>
-                                      </div>
-                                    )}
-                                  </Dropzone>
+                                  
+                                  <div>
+                                            <Row>
+            <Col>
+              <Card>
+                <CardBody>
+                  <CardTitle>Data from uploaded Document</CardTitle>
+                  
+                  <div className="form-group row">
+                    <label
+                      htmlFor="example-text-input"
+                      className="col-md-2 col-form-label"
+                    >
+                      FullName
+                    </label>
+                    <div className="col-md-10">
+                      <input
+                        className="form-control"
+                        type="text"
+                        defaultValue="Artisanal kale"
+                        value={fullName}
+                      />
+                    </div>
+                  </div>
+                 
+                  <div className="form-group row">
+                    <label
+                      htmlFor="example-search-input"
+                      className="col-md-2 col-form-label"
+                    >
+                      Age
+                    </label>
+                    <div className="col-md-10">
+                      <input
+                        className="form-control"
+                        type="text"
+                        defaultValue="How do I shoot web"
+                        value={age}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label
+                      htmlFor="example-email-input"
+                      className="col-md-2 col-form-label"
+                    >
+                      Document No
+                    </label>
+                    <div className="col-md-10">
+                      <input
+                        className="form-control"
+                        type="email"
+                        defaultValue="bootstrap@example.com"
+                        value={documentNo}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label
+                      htmlFor="example-url-input"
+                      className="col-md-2 col-form-label"
+                    >
+                      Country
+                    </label>
+                    <div className="col-md-10">
+                      <input
+                        className="form-control"
+                        type="text"
+                        defaultValue="country"
+                        value={counrty}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label
+                      htmlFor="example-tel-input"
+                      className="col-md-2 col-form-label"
+                    >
+                      Region
+                    </label>
+                    <div className="col-md-10">
+                      <input
+                        className="form-control"
+                        type="text"
+                        defaultValue="state"
+                        value={region}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label
+                      htmlFor="example-password-input"
+                      className="col-md-2 col-form-label"
+                    >
+                      Type
+                    </label>
+                    <div className="col-md-10">
+                      <input
+                        className="form-control"
+                        type="text"
+                        defaultValue="hunter2"
+                        value={type}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label
+                      htmlFor="example-password-input"
+                      className="col-md-2 col-form-label"
+                    >
+                      Date of Birth
+                    </label>
+                    <div className="col-md-10">
+                      <input
+                        className="form-control"
+                        type="text"
+                        defaultValue="hunter2"
+                        value={dateofbirth}
+                      />
+                    </div>
+                  </div>
+                  
+             </CardBody>
+              </Card>
+            </Col>
+          </Row>
+                                            </div>
+
                                   <div
                                     className="dropzone-previews mt-3"
                                     id="file-previews"
