@@ -49,12 +49,10 @@ const DocumentVerification = () => {
     const [documentType, setdocumentType] = useState('default')
     const [flag, setFlag] = useState(false);
     const [fullName, setFullName] = useState('FullName')
-    const [sex, setsex] = useState('Gender')
     const [age, setage] = useState('Age')
     const [documentNo, setdocumentNo] = useState('Document No')
     const [counrty, setcounrty] = useState('country')
     const [region, setregion] = useState('state/region')
-    const [type, settype] = useState('Document Type')
     const [dateofbirth, setdateofbirth] = useState('')
 
  function togglemodal(){
@@ -86,15 +84,25 @@ formData.append("docType",docType);
       
       setFlag(false);
       //history.push("/confirm-document");
+     if(val === "ROCFailed")
+     {
      
+      toastr.error('Bio Authentication Fialed')
+     }
+     else if(val.scanStatus === "successful")
+     {
       setFullName(val.documentInformation.fullName);
-      setsex(val.scanResponse.scanVariables.sex)
       setage(val.scanResponse.scanVariables.age);
       setdocumentNo(val.documentInformation.documentNo);
       setcounrty(val.scanResponse.scanVariables.classInfo.country);
       setregion(val.scanResponse.scanVariables.classInfo.region)
-      settype(val.scanResponse.scanVariables.classInfo.type)
       setdateofbirth(val.scanResponse.scanVariables.dateOfBirth.originalString)
+
+     }
+     else
+     {
+      toastr.error('OCR Response Fialed')
+     }
       
 
           })
@@ -485,7 +493,7 @@ formData.append("docType",docType);
                               </TabPane>
                               <TabPane tabId={3} id="doc-verification">
                                 <h5 className="font-size-14 mb-3">
-                                  confrim Details
+                                  Confrim Details
                                 </h5>
                                 <div className="kyc-doc-verification mb-3">
                                   
@@ -494,7 +502,7 @@ formData.append("docType",docType);
             <Col>
               <Card>
                 <CardBody>
-                  <CardTitle>Data from uploaded Document</CardTitle>
+                  <CardTitle></CardTitle>
                   
                   <div className="form-group row">
                     <label
@@ -577,22 +585,7 @@ formData.append("docType",docType);
                       />
                     </div>
                   </div>
-                  <div className="form-group row">
-                    <label
-                      htmlFor="example-password-input"
-                      className="col-md-2 col-form-label"
-                    >
-                      Type
-                    </label>
-                    <div className="col-md-10">
-                      <input
-                        className="form-control"
-                        type="text"
-                        defaultValue="hunter2"
-                        value={type}
-                      />
-                    </div>
-                  </div>
+                 
                   <div className="form-group row">
                     <label
                       htmlFor="example-password-input"
@@ -616,47 +609,7 @@ formData.append("docType",docType);
           </Row>
                                             </div>
 
-                                  <div
-                                    className="dropzone-previews mt-3"
-                                    id="file-previews"
-                                  >
-                                    {selectedFiles.map((f, i) => {
-                                      return (
-                                        <Card
-                                          className="mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete"
-                                          key={i + "-file"}
-                                        >
-                                          <div className="p-2">
-                                            <Row className="align-items-center">
-                                              <Col className="col-auto">
-                                                <img
-                                                  data-dz-thumbnail=""
-                                                  height="80"
-                                                  className="avatar-sm rounded bg-light"
-                                                  alt={f.name}
-                                                  src={f.preview}
-                                                />
-                                              </Col>
-                                              <Col>
-                                                <Link
-                                                  to="#"
-                                                  className="text-muted font-weight-bold"
-                                                >
-                                                  {f.name}
-                                                </Link>
-                                                <p className="mb-0">
-                                                  <strong>
-                                                    {f.formattedSize}
-                                                  </strong>
-                                                </p>
-                                              </Col>
-                                            </Row>
-                                          </div>
-                                        </Card>
-                                      )
-                                    })}
-                                  </div>
-                                </div>
+                                                                  </div>
                               </TabPane>
                             </TabContent>
                             <ul className="pager wizard twitter-bs-wizard-pager-link">
