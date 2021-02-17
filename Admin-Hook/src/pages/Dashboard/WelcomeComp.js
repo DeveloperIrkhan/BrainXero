@@ -15,7 +15,7 @@ const WelcomeComp = () => {
             <Col xs="7">
               <div className="text-primary p-3">
                 <h5 className="text-primary">Welcome Back !</h5>
-                <p>Skote Dashboard</p>
+                <p>Merchant Dashboard</p>
               </div>
             </Col>
             <Col xs="5" className="align-self-end">
@@ -25,7 +25,7 @@ const WelcomeComp = () => {
         </div>
         <CardBody className="pt-0">
           <Row>
-            <Col sm="4">
+            <Col sm="12">
               <div className="avatar-md profile-user-wid mb-4">
                 <img
                   src={avatar1}
@@ -33,22 +33,13 @@ const WelcomeComp = () => {
                   className="img-thumbnail rounded-circle"
                 />
               </div>
-              <h5 className="font-size-15 text-truncate">Henry Price</h5>
-              <p className="text-muted mb-0 text-truncate">UI/UX Designer</p>
+              <h5 className="font-size-15 text-truncate">Bank of Wonderland</h5>
+              <p className="text-muted mb-0 text-truncate">Sydney, NSW, Australia</p>
             </Col>
 
             <Col sm="8">
               <div className="pt-4">
-                <Row>
-                  <Col xs="6">
-                    <h5 className="font-size-15">125</h5>
-                    <p className="text-muted mb-0">Projects</p>
-                  </Col>
-                  <Col xs="6">
-                    <h5 className="font-size-15">$1245</h5>
-                    <p className="text-muted mb-0">Revenue</p>
-                  </Col>
-                </Row>
+
                 <div className="mt-4">
                   <Link
                     to=""

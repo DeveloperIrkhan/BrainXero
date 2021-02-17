@@ -37,16 +37,18 @@ import Breadcrumbs from "../../components/Common/Breadcrumb"
 //i18n
 import { withTranslation } from "react-i18next"
 
+import BarChart from "./barchart"
+
 const Dashboard = props => {
   const [modal, setmodal] = useState(false)
 
   const reports = [
-    { title: "Orders", iconClass: "bx-copy-alt", description: "1,235" },
-    { title: "Revenue", iconClass: "bx-archive-in", description: "$35, 723" },
+    { title: "Verification Requests", iconClass: "bx-copy-alt", description: "1,235" },
+    { title: "Users", iconClass: "bx-archive-in", description: "1,000" },
     {
-      title: "Average Price",
+      title: "Average Requests",
       iconClass: "bx-purchase-tag-alt",
-      description: "$16.2",
+      description: "300",
     },
   ]
   const email = [
@@ -103,7 +105,7 @@ const Dashboard = props => {
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4 float-sm-left">
-                    Email Sent
+                   Verifications
                   </CardTitle>
                   <div className="float-sm-right">
                     <ul className="nav nav-pills">
@@ -122,26 +124,12 @@ const Dashboard = props => {
                     </ul>
                   </div>
                   <div className="clearfix"></div>
-                  <StackedColumnChart />
+                  <BarChart />
                 </CardBody>
               </Card>
             </Col>
           </Row>
-
-          <Row>
-            <Col xl="4">
-              <SocialSource />
-            </Col>
-            <Col xl="4">
-              <ActivityComp />
-            </Col>
-
-            <Col xl="4">
-              <TopCities />
-            </Col>
-          </Row>
-
-          <Row>
+        <Row>
             <Col lg="12">
               <LatestTranaction />
             </Col>
