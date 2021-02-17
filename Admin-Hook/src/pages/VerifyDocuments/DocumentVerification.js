@@ -88,13 +88,14 @@ formData.append("docType",docType);
       //history.push("/confirm-document");
      
       setFullName(val.documentInformation.fullName);
+      setsex(val.scanResponse.scanVariables.sex)
       setage(val.scanResponse.scanVariables.age);
       setdocumentNo(val.documentInformation.documentNo);
       setcounrty(val.scanResponse.scanVariables.classInfo.country);
       setregion(val.scanResponse.scanVariables.classInfo.region)
       settype(val.scanResponse.scanVariables.classInfo.type)
       setdateofbirth(val.scanResponse.scanVariables.dateOfBirth.originalString)
-      setsex(val.scanResponse.scanVariables.sex)
+      
 
           })
 
