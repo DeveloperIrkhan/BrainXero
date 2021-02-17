@@ -11,11 +11,11 @@ const MonthlyEarning = () => {
       {" "}
       <Card>
         <CardBody>
-          <CardTitle className="mb-4">Monthly Earning</CardTitle>
+          <CardTitle className="mb-4">Monthly Transactions</CardTitle>
           <Row>
             <Col sm="6">
               <p className="text-muted">This month</p>
-              <h3>$34,252</h3>
+              <h3>40000</h3>
               <p className="text-muted">
                 <span className="text-success mr-2">
                   {" "}
@@ -39,7 +39,6 @@ const MonthlyEarning = () => {
             </Col>
           </Row>
           <p className="text-muted mt-4 mb-3">
-            We craft digital, graphic and dimensional thinking.
           </p>
         </CardBody>
       </Card>
